@@ -1,0 +1,12 @@
+# Terraform files
+**/.terraform/
+*.tfstate
+*.tfstate.*
+
+# Mac and Windows junk files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+package/
