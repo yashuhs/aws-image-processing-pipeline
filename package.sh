@@ -12,7 +12,7 @@ rm -rf ${OUTPUT_DIR}
 mkdir -p ${OUTPUT_DIR}
 
 # Install dependencies into a temporary package directory
-py -m pip install -r requirements.txt -t ${OUTPUT_DIR}/package
+python3 -m pip install -r requirements.txt -t ${OUTPUT_DIR}/package
 
 # Go into the package directory and zip dependencies
 cd ${OUTPUT_DIR}/package
