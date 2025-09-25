@@ -1,3 +1,8 @@
+Here is the complete `README.md` content formatted in raw markdown. You can copy this entire block and paste it directly into your `README.md` file.
+
+-----
+
+````markdown
 # Serverless Image Processing Pipeline on AWS
 
 This project implements a fully automated, event-driven pipeline on AWS to process images in real-time. It's designed to solve a common business problem for web applications like e-commerce sites, where multiple versions of an image (e.g., thumbnails, web-optimized) are needed automatically upon upload.
@@ -25,7 +30,15 @@ graph TD;
     style B fill:#FF9900,stroke:#333,stroke-width:2px
     style D fill:#FF9900,stroke:#333,stroke-width:2px
     style C fill:#5A30B5,stroke:#FFF,stroke-width:2px,color:#FFF
-```
+````
+
+## Demo 📸
+
+Here is a demonstration of the pipeline in action. After uploading an image to the source bucket, the processed versions automatically appear in the destination bucket.
+
+*(To add your own GIF, create an `assets` folder in your project, save a `demo.gif` file inside it, push it to your repository, and use the following line of code.)*
+
+`![Demonstration of the image processing pipeline](assets/demo.gif)`
 
 ## Problem Solved
 
@@ -46,6 +59,51 @@ In many applications, developers need to manually resize images, which is slow, 
   - **Application Code**: Python 3.9
   - **Libraries**: Boto3, Pillow
 
+-----
+
+## Development Environment
+
+This project can be deployed from two primary environments: a cloud-based Linux environment (like AWS CloudShell) or a local Windows machine. The setup steps vary slightly.
+
+### 1\. AWS CloudShell or Linux (Recommended)
+
+This is the simplest and most reliable method. The `package.sh` script is designed for a Linux environment and works out of the box.
+
+  * **`package.sh` modification**: Ensure the package command uses `python3`:
+    ```bash
+    python3 -m pip install -r requirements.txt -t ${OUTPUT_DIR}/package
+    ```
+
+### 2\. Local Windows Machine
+
+If you are running this project from a local Windows machine, the `package.sh` script will likely fail due to environment path issues between Git Bash and Windows.
+
+  * **Solution**: Bypass the script and package the Lambda function manually using the Windows Command Prompt (CMD), where Python is reliably found.
+
+    1.  Create the packaging folder:
+        ```cmd
+        mkdir package
+        ```
+    2.  Install dependencies into the folder:
+        ```cmd
+        pip install -r requirements.txt --target ./package
+        ```
+    3.  Copy your Lambda code:
+        ```cmd
+        copy src\lambda_function.py package\
+        ```
+    4.  **Create the ZIP file**: In File Explorer, go into the `package` folder, select all files, right-click, and choose `Send to > Compressed (zipped) folder`. Rename the resulting file to `image_processor.zip`.
+    5.  **Create the `dist` folder**:
+        ```cmd
+        mkdir dist
+        ```
+    6.  **Move the ZIP file**:
+        ```cmd
+        move image_processor.zip dist\
+        ```
+
+-----
+
 ## Setup and Deployment
 
 Follow these steps to deploy the infrastructure on your own AWS account.
@@ -62,7 +120,7 @@ Follow these steps to deploy the infrastructure on your own AWS account.
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
+    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
     cd your-repo-name
     ```
 
@@ -74,10 +132,9 @@ Follow these steps to deploy the infrastructure on your own AWS account.
     ```
 
 3.  **Package the Lambda Function:**
-    This script will install dependencies and create a `.zip` file for the Lambda function.
+    Follow the instructions in the "Development Environment" section above. If using a Linux environment, run:
 
     ```bash
-    # On Windows, use Git Bash to run this command
     bash package.sh
     ```
 
@@ -109,3 +166,8 @@ To avoid ongoing charges, destroy the resources when you are finished.
     cd terraform
     terraform destroy --auto-approve
     ```
+
+<!-- end list -->
+
+```
+```
