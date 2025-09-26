@@ -4,28 +4,18 @@ This project implements a fully automated, event-driven pipeline on AWS to proce
 
 ## Architectural Diagram
 
-The architecture is 100% serverless and event-driven. An image upload to the source S3 bucket triggers a Lambda function that performs the resizing and saves the results to a destination bucket.
+The architecture is 100% serverless and event-driven. An image upload to the source S3 bucket triggers a Lambda function that processes the image and saves the results to a destination bucket.
 
 ```mermaid
 graph TD;
-    subgraph "User's Action"
-        A[👤 User] -- Uploads image (.jpg, .png) --> B((Source S3 Bucket));
-    end
+    A[👤 User] -- Uploads Image --> B((Source S3 Bucket));
+    B -- S3 Event Trigger --> C{⚙️ AWS Lambda};
+    C -- Creates Resized Versions --> D((Destination S3 Bucket));
 
-    subgraph "AWS Automated Workflow"
-        B -- S3 Event Trigger --> C{⚙️ AWS Lambda Function};
-        C -- Processes Image --> D((Destination S3 Bucket));
-    end
-
-    subgraph "Processed Images"
-        D -- Stores --> E[🖼️ Thumbnail Version];
-        D -- Stores --> F[🖼️ Web-Optimized Version];
-    end
-
-    style B fill:#FF9900,stroke:#FFFFFF,stroke-width:2px
-    style D fill:#FF9900,stroke:#FFFFFF,stroke-width:2px
+    style B fill:#FF9900,stroke:#000000,stroke-width:2px
+    style D fill:#FF9900,stroke:#000000,stroke-width:2px
     style C fill:#5A30B5,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
-````
+```
 
 ## Demo 📸
 
@@ -105,6 +95,18 @@ Follow these steps to deploy the infrastructure on your own AWS account.
 
 ### Prerequisites
 
+The prerequisites vary based on your chosen development environment.
+
+#### For AWS CloudShell or another Cloud-Based Linux IDE (Recommended)
+
+You only need two things to get started:
+
+1.  An AWS Account with programmatic access.
+2.  A web browser.
+    *(Tools like Git, Python, and the AWS CLI are pre-installed in CloudShell).*
+
+#### For a Local Windows or macOS/Linux Machine
+
 1.  An AWS Account with programmatic access.
 2.  [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli) installed on your local machine.
 3.  [Python 3.9](https://www.python.org/downloads/) installed.
@@ -119,20 +121,19 @@ Follow these steps to deploy the infrastructure on your own AWS account.
     cd your-repo-name
     ```
 
-2.  **Configure your AWS Credentials:**
+2.  **Configure Your Environment:**
 
-    ```bash
-    aws configure
-    ```
+      - **If using AWS CloudShell:** No action needed. Your credentials are automatically available.
+      - **If using a Local Machine:** Configure your AWS credentials.
+        ```bash
+        aws configure
+        ```
 
 3.  **Package the Lambda Function:**
-    Follow the instructions in the "Development Environment" section above. If using a Linux environment, run:
-
-    ```bash
-    bash package.sh
-    ```
+    Follow the instructions in the "Development Environment" section above.
 
 4.  **Deploy the Infrastructure:**
+    Navigate to the `terraform` directory and run the deployment commands.
 
     ```bash
     cd terraform
