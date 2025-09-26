@@ -1,8 +1,3 @@
-
-
------
-
-````markdown
 # Serverless Image Processing Pipeline on AWS
 
 This project implements a fully automated, event-driven pipeline on AWS to process images in real-time. It's designed to solve a common business problem for web applications like e-commerce sites, where multiple versions of an image (e.g., thumbnails, web-optimized) are needed automatically upon upload.
@@ -30,7 +25,7 @@ graph TD;
     style B fill:#FF9900,stroke:#333,stroke-width:2px
     style D fill:#FF9900,stroke:#333,stroke-width:2px
     style C fill:#5A30B5,stroke:#FFF,stroke-width:2px,color:#FFF
-```
+````
 
 ## Demo 📸
 
@@ -69,7 +64,7 @@ This project can be deployed from two primary environments: a cloud-based Linux 
 
 This is the simplest and most reliable method. The `package.sh` script is designed for a Linux environment and works out of the box.
 
-  * **`package.sh` modification**: Ensure the package command uses `python3`:
+  - **`package.sh` modification**: Ensure the package command uses `python3`:
     ```bash
     python3 -m pip install -r requirements.txt -t ${OUTPUT_DIR}/package
     ```
@@ -78,7 +73,7 @@ This is the simplest and most reliable method. The `package.sh` script is design
 
 If you are running this project from a local Windows machine, the `package.sh` script will likely fail due to environment path issues between Git Bash and Windows.
 
-  * **Solution**: Bypass the script and package the Lambda function manually using the Windows Command Prompt (CMD), where Python is reliably found.
+  - **Solution**: Bypass the script and package the Lambda function manually using the Windows Command Prompt (CMD), where Python is reliably found.
 
     1.  Create the packaging folder:
         ```cmd
@@ -125,7 +120,6 @@ Follow these steps to deploy the infrastructure on your own AWS account.
     ```
 
 2.  **Configure your AWS Credentials:**
-    Make sure your AWS CLI is configured with credentials that have permissions to create the resources in the Terraform files.
 
     ```bash
     aws configure
@@ -139,7 +133,6 @@ Follow these steps to deploy the infrastructure on your own AWS account.
     ```
 
 4.  **Deploy the Infrastructure:**
-    Navigate to the `terraform` directory and run the following commands.
 
     ```bash
     cd terraform
@@ -151,14 +144,14 @@ Follow these steps to deploy the infrastructure on your own AWS account.
 
 1.  After deployment, Terraform will output the `source_bucket_name`.
 2.  Navigate to the AWS S3 console and find this bucket.
-3.  Upload a `.jpg` or `.png` image into the bucket.
-4.  Check the `destination_bucket_name`. The resized images will appear in the `thumbnails/` and `web/` folders within seconds.
+3.  Upload a `.jpg` or `.png` image.
+4.  Check the `destination_bucket_name` to find the resized images.
 
 ## Clean Up
 
 To avoid ongoing charges, destroy the resources when you are finished.
 
-**IMPORTANT:** You must manually delete the objects inside the S3 buckets before Terraform can destroy the buckets themselves.
+**IMPORTANT:** You must manually delete the objects inside the S3 buckets before Terraform can destroy them.
 
 1.  Navigate to the `terraform` directory.
 2.  Run the destroy command:
@@ -166,8 +159,3 @@ To avoid ongoing charges, destroy the resources when you are finished.
     cd terraform
     terraform destroy --auto-approve
     ```
-
-<!-- end list -->
-
-```
-```
