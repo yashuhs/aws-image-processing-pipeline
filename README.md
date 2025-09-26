@@ -30,7 +30,7 @@ graph TD;
     style B fill:#FF9900,stroke:#333,stroke-width:2px
     style D fill:#FF9900,stroke:#333,stroke-width:2px
     style C fill:#5A30B5,stroke:#FFF,stroke-width:2px,color:#FFF
-````
+```
 
 ## Demo 📸
 
