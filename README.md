@@ -22,8 +22,8 @@ graph TD;
         D -- Stores --> F[🖼️ Web-Optimized Version];
     end
 
-    style B fill:#FF9900,stroke:#000000,stroke-width:2px
-    style D fill:#FF9900,stroke:#000000,stroke-width:2px
+    style B fill:#FFDAB9,stroke:#FFFFFF,stroke-width:2px
+    style D fill:#FFDAB9,stroke:#FFFFFF,stroke-width:2px
     style C fill:#5A30B5,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
 ```
 
@@ -170,8 +170,3 @@ To avoid ongoing charges, destroy the resources when you are finished.
     cd terraform
     terraform destroy --auto-approve
     ```
-
-<!-- end list -->
-
-```
-```
