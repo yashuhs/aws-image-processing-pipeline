@@ -4,13 +4,23 @@ This project implements a fully automated, event-driven pipeline on AWS to proce
 
 ## Architectural Diagram
 
-The architecture is 100% serverless and event-driven. An image upload to the source S3 bucket triggers a Lambda function that processes the image and saves the results to a destination bucket.
+The architecture is 100% serverless and event-driven. An image upload to the source S3 bucket triggers a Lambda function that performs the resizing and saves the results to a destination bucket.
 
 ```mermaid
 graph TD;
-    A[👤 User] -- Uploads Image --> B((Source S3 Bucket));
-    B -- S3 Event Trigger --> C{⚙️ AWS Lambda};
-    C -- Creates Resized Versions --> D((Destination S3 Bucket));
+    subgraph "User's Action"
+        A[👤 User] -- Uploads image (.jpg, .png) --> B((Source S3 Bucket));
+    end
+
+    subgraph "AWS Automated Workflow"
+        B -- S3 Event Trigger --> C{⚙️ AWS Lambda Function};
+        C -- Processes Image --> D((Destination S3 Bucket));
+    end
+
+    subgraph "Processed Images"
+        D -- Stores --> E[🖼️ Thumbnail Version];
+        D -- Stores --> F[🖼️ Web-Optimized Version];
+    end
 
     style B fill:#FF9900,stroke:#000000,stroke-width:2px
     style D fill:#FF9900,stroke:#000000,stroke-width:2px
@@ -160,3 +170,8 @@ To avoid ongoing charges, destroy the resources when you are finished.
     cd terraform
     terraform destroy --auto-approve
     ```
+
+<!-- end list -->
+
+```
+```
