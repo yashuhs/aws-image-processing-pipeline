@@ -22,8 +22,8 @@ graph TD;
         D -- Stores --> F[🖼️ Web-Optimized Version];
     end
 
-    style B fill:#FFDAB9,stroke:#FFFFFF,stroke-width:2px
-    style D fill:#FFDAB9,stroke:#FFFFFF,stroke-width:2px
+    style B fill:#FFDAB9,stroke:#2E7D32,stroke-width:2px
+    style D fill:#FFDAB9,stroke:#2E7D32,stroke-width:2px
     style C fill:#5A30B5,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
 ```
 
